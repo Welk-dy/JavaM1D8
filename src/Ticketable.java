@@ -1,3 +1,3 @@
-interface Ticketable {
-    void printTicketDetails();
+public interface Ticketable {
+    void printTicketDetails(); // Method to print ticket details
 }

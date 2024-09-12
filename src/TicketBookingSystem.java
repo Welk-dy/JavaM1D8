@@ -2,94 +2,67 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-// TicketBookingSystem.java
 public class TicketBookingSystem {
-    private Map<String, Event> events; // Maps event names to Event objects
+    private final Map<String, Event> events;
 
-    // Constructor
     public TicketBookingSystem() {
         events = new HashMap<>();
     }
 
-    // Method to create an event
     public void createEvent(String eventName) {
-        events.put(eventName.toLowerCase(), new Event(eventName)); // Store event names in lowercase
+        events.put(eventName.toLowerCase(), new Event(eventName));
     }
 
-    // Method to add a ticket to an event with a type description
     public void addTicketToEvent(String eventName, double price, String ticketType) {
         Event event = events.get(eventName.toLowerCase());
         if (event != null) {
-            Ticket ticket = new Ticket(eventName, price, ticketType);  // Pass ticket type as well
+            Ticket ticket = new Ticket(eventName, price, ticketType);
             event.addTicket(ticket);
         } else {
             System.out.println("Event not found.");
         }
     }
 
-    // Method to display all available events and their tickets
-    public void displayAvailableEvents() {
-        if (events.isEmpty()) {
-            System.out.println("No events available.");
-            return;
-        }
-
-        System.out.println("Available Events and Tickets:");
-        int index = 1;
-        for (Event event : events.values()) {
-            System.out.println(index + ". Event: " + event.getEventName());
-            Map<String, Double> availableTickets = event.getAvailableTickets();
-            for (Map.Entry<String, Double> entry : availableTickets.entrySet()) {
-                System.out.println("  Type: " + entry.getKey() + ", Price: $" + entry.getValue());
-            }
-            index++;
-        }
-    }
-
-    // Method to get event name by index
-    public String getEventNameByIndex(int index) {
-        int currentIndex = 1;
-        for (Event event : events.values()) {
-            if (currentIndex == index) {
-                return event.getEventName();
-            }
-            currentIndex++;
-        }
-        return null;
-    }
-
-    // Method to book a ticket
     public void bookTicket(String eventName, String ticketType, User user) {
         Event event = events.get(eventName.toLowerCase());
         if (event != null) {
             Ticket ticketToBook = event.getFirstAvailableTicketByType(ticketType);
 
             if (ticketToBook != null) {
-                ticketToBook.bookTicket();
-                System.out.println("Ticket booked successfully for " + user.getName() + " (Email: " + user.getEmail() + "). Ticket details:");
-                ticketToBook.printTicketDetails(); // Print ticket details including ticket ID
+                if (!ticketToBook.isBooked()) {
+                    ticketToBook.bookTicket();
+                    System.out.println("Ticket booked successfully for " + user.getName() + " (Email: " + user.getEmail() + ").");
+                    ticketToBook.printTicketDetails();
+                }
             } else {
-                System.out.println("Ticket of type '" + ticketType + "' not available for event '" + eventName + "'.");
+                System.out.println("Ticket of type '" + ticketType + "' is fully booked for '" + eventName + "' event.");
+                }
+        }
+    }
+
+    public void validateTicket(String ticketId) {
+        for (Event event : events.values()) {
+            Ticket ticket = event.getTicketById(ticketId);
+            if (ticket != null) {
+                System.out.println("Event: " + ticket.getEventName());
+                System.out.print("- " + ticket.getTicketType() + " Ticket");
+                System.out.print(" $" + ticket.getPrice());
+                System.out.println(", Status: " + (ticket.isBooked() ? "Booked" : "Available"));
+                return;
             }
-        } else {
-            System.out.println("Event not found.");
+        }
+        System.out.println("Ticket ID not found.");
+    }
+
+    public void printEventDetails() {
+        for (Event event : events.values()) {
+            System.out.println("Event: " + event.getEventName());
+            for (Ticketable ticket : event.getTickets().values()) {
+                ticket.printTicketDetails(); // Polymorphic call
+            }
         }
     }
 
-    // Method to validate user input (case-insensitive for event name)
-    private boolean isEventNameValid(int eventIndex) {
-        return getEventNameByIndex(eventIndex) != null;
-    }
-
-    private boolean isTicketTypeValid(String eventName, String ticketType) {
-        Event event = events.get(eventName.toLowerCase());
-        if (event != null) {
-            return event.isTicketTypeAvailable(ticketType);
-        }
-        return false;
-    }
-
-    // Main method to interact with the system
     public static void main(String[] args) {
         TicketBookingSystem system = new TicketBookingSystem();
         system.createEvent("Music Concert");
@@ -102,69 +75,71 @@ public class TicketBookingSystem {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Display all available events and tickets
-        system.displayAvailableEvents();
-
-        // Get user details
-        System.out.print("Enter your name: ");
-        String name = scanner.nextLine();
-        System.out.print("Enter your email: ");
-        String email = scanner.nextLine();
-        User user = new User(name, email);
-
-        String eventName = "";
-        String ticketType = "";
-
-        // Loop to prompt for a valid event name
         while (true) {
-            System.out.print("Enter the number corresponding to the event you want to book a ticket for (or type 'exit' to quit): ");
-            String eventInput = scanner.nextLine();
-            if (eventInput.equalsIgnoreCase("exit")) {
-                System.out.println("Exiting the booking process.");
-                return;
-            }
-            try {
-                int eventIndex = Integer.parseInt(eventInput);
-                if (system.isEventNameValid(eventIndex)) {
-                    eventName = system.getEventNameByIndex(eventIndex);
+            System.out.println("1. Book Ticket");
+            System.out.println("2. Validate Ticket");
+            System.out.println("3. Exit");
+            System.out.print("Enter your choice (1, 2, or 3): ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            if (choice == 1) {
+                system.printEventDetails(); // Print event details before booking
+                System.out.print("Enter the event name or 'exit' to quit: ");
+                String eventInput = scanner.nextLine();
+                if (eventInput.equalsIgnoreCase("exit")) {
+                    System.out.println("Exiting the booking process.");
                     break;
-                } else {
-                    System.out.println("Invalid event selection. Please enter a valid number.");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number corresponding to the event.");
-            }
-        }
 
-        // Loop to prompt for a valid ticket type
-        while (true) {
-            System.out.print("Enter the Ticket Type (1 for Standard, 2 for VIP, or type 'exit' to quit): ");
-            String ticketTypeInput = scanner.nextLine();
-            if (ticketTypeInput.equalsIgnoreCase("exit")) {
-                System.out.println("Exiting the booking process.");
-                return;
-            }
+                String eventName;
+                if (eventInput.equalsIgnoreCase("music concert")) {
+                    eventName = "Music Concert";
+                } else if (eventInput.equalsIgnoreCase("art exhibition")) {
+                    eventName = "Art Exhibition";
+                } else {
+                    System.out.println("Invalid event selection. Please enter Music Concert or Art Exhibition.");
+                    continue;
+                }
 
-            if (ticketTypeInput.equals("1")) {
-                ticketType = "Standard";
-            } else if (ticketTypeInput.equals("2")) {
-                ticketType = "VIP";
-            } else {
-                System.out.println("Invalid ticket type. Please enter '1' for Standard or '2' for VIP.");
-                continue;
-            }
+                System.out.print("Enter the ticket type or 'exit' to quit: ");
+                String ticketTypeInput = scanner.nextLine();
+                if (ticketTypeInput.equalsIgnoreCase("exit")) {
+                    System.out.println("Exiting the booking process.");
+                    break;
+                }
 
-            if (system.isTicketTypeValid(eventName, ticketType)) {
+                String ticketType;
+                if (ticketTypeInput.equalsIgnoreCase("standard")) {
+                    ticketType = "Standard";
+                } else if (ticketTypeInput.equalsIgnoreCase("vip")) {
+                    ticketType = "VIP";
+                } else {
+                    System.out.println("Invalid ticket type. Please enter Standard or VIP.");
+                    continue;
+                }
+
+                System.out.print("Enter your name: ");
+                String name = scanner.nextLine();
+                System.out.print("Enter your email: ");
+                String email = scanner.nextLine();
+                User user = new User(name, email);
+
+                system.bookTicket(eventName, ticketType, user);
+
+            } else if (choice == 2) {
+                System.out.print("Enter ticket ID to validate: ");
+                String ticketId = scanner.nextLine();
+                system.validateTicket(ticketId);
+
+            } else if (choice == 3) {
+                System.out.println("Exiting...");
                 break;
+
             } else {
-                System.out.println("Invalid ticket type for the selected event. Please try again.");
+                System.out.println("Invalid choice. Please select again.");
             }
         }
-
-        // Book the selected ticket
-        system.bookTicket(eventName, ticketType, user);
-
-        // Display total tickets sold
-        System.out.println("Total tickets sold: " + Ticket.getTotalTicketsSold());
+        scanner.close();
     }
 }

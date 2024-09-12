@@ -1,57 +1,37 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-// Event.java
 public class Event {
-    private String eventName;
-    private List<Ticket> tickets;
+    private final String name;
+    private final Map<String, Ticket> tickets;
 
-    // Constructor
-    public Event(String eventName) {
-        this.eventName = eventName;
-        this.tickets = new ArrayList<>();
+    public Event(String name) {
+        this.name = name;
+        this.tickets = new LinkedHashMap<>(); // Use LinkedHashMap to maintain insertion order
     }
 
-    // Getter for event name
     public String getEventName() {
-        return eventName;
+        return name;
     }
 
-    // Method to add a ticket to the event
+    public Map<String, Ticket> getTickets() {
+        return tickets;
+    }
+
     public void addTicket(Ticket ticket) {
-        tickets.add(ticket);
+        tickets.put(ticket.getTicketId(), ticket);
     }
 
-    // Method to get available tickets by type
-    public Map<String, Double> getAvailableTickets() {
-        Map<String, Double> availableTickets = new HashMap<>();
-        for (Ticket ticket : tickets) {
-            if (ticket.isAvailable()) {
-                availableTickets.put(ticket.getType(), ticket.getPrice());
-            }
-        }
-        return availableTickets;
-    }
-
-    // Method to check if a ticket type is available
-    public boolean isTicketTypeAvailable(String ticketType) {
-        for (Ticket ticket : tickets) {
-            if (ticket.getType().equalsIgnoreCase(ticketType) && ticket.isAvailable()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Method to get the first available ticket of a specific type
     public Ticket getFirstAvailableTicketByType(String ticketType) {
-        for (Ticket ticket : tickets) {
-            if (ticket.getType().equalsIgnoreCase(ticketType) && ticket.isAvailable()) {
+        for (Ticket ticket : tickets.values()) {
+            if (ticket.getTicketType().equalsIgnoreCase(ticketType) && !ticket.isBooked()) {
                 return ticket;
             }
         }
         return null;
+    }
+
+    public Ticket getTicketById(String ticketId) {
+        return tickets.get(ticketId);
     }
 }

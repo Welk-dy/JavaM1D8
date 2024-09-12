@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99f71eaf-17b6-496c-b5a1-8532d0cab1ea" name="Changes" comment="Feat : added the feature, but still debugging at the selecting the event type">
+    <list default="true" id="99f71eaf-17b6-496c-b5a1-8532d0cab1ea" name="Changes" comment="Feat : Completed Exercises">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ticket.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TicketBookingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TicketBookingSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ticketable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ticketable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +26,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="TicketID" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -70,6 +77,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.TicketBookingSystem" />
+        <item itemvalue="Application.TicketBookingSystem" />
+        <item itemvalue="Application.TicketBookingSystem" />
+        <item itemvalue="Application.TicketBookingSystem" />
+        <item itemvalue="Application.TicketBookingSystem" />
       </list>
     </recent_temporary>
   </component>
@@ -98,7 +109,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726107531475</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Feat : Completed Exercises">
+      <option name="closed" value="true" />
+      <created>1726110553864</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1726110553864</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -115,17 +134,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First Commit" />
     <MESSAGE value="Feat : added the feature, but still debugging at the selecting the event type" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feat : added the feature, but still debugging at the selecting the event type" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Feat : Completed Exercises" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : Completed Exercises" />
   </component>
 </project>
