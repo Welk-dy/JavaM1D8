@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99f71eaf-17b6-496c-b5a1-8532d0cab1ea" name="Changes" comment="First Commit">
-      <change afterPath="$PROJECT_DIR$/src/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Ticket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/TicketBookingSystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Ticketable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
+    <list default="true" id="99f71eaf-17b6-496c-b5a1-8532d0cab1ea" name="Changes" comment="Feat : added the feature, but still debugging at the selecting the event type">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TicketBookingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TicketBookingSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +38,9 @@
     &quot;accountId&quot;: &quot;d786f768-793e-4a67-88b3-97d7014c1435&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -57,6 +59,20 @@
     "onboarding.tips.debug.path": "C:/Users/ferna/IdeaProjects/JavaLearningDay8/src/Main.java"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="TicketBookingSystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TicketBookingSystem" />
+      <module name="JavaLearningDay8" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TicketBookingSystem" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -74,7 +90,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726049371083</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Feat : added the feature, but still debugging at the selecting the event type">
+      <option name="closed" value="true" />
+      <created>1726107531475</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1726107531475</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -90,7 +114,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First Commit" />
+    <MESSAGE value="Feat : added the feature, but still debugging at the selecting the event type" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feat : added the feature, but still debugging at the selecting the event type" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+// Event.java
 public class Event {
     private String eventName;
     private List<Ticket> tickets;
@@ -11,13 +14,9 @@ public class Event {
         this.tickets = new ArrayList<>();
     }
 
-    // Getters and Setters
+    // Getter for event name
     public String getEventName() {
         return eventName;
-    }
-
-    public List<Ticket> getTickets() {
-        return tickets;
     }
 
     // Method to add a ticket to the event
@@ -25,13 +24,34 @@ public class Event {
         tickets.add(ticket);
     }
 
-    // Method to find an available ticket
-    public Ticket findAvailableTicket() {
+    // Method to get available tickets by type
+    public Map<String, Double> getAvailableTickets() {
+        Map<String, Double> availableTickets = new HashMap<>();
         for (Ticket ticket : tickets) {
-            if (!ticket.isBooked()) {
+            if (ticket.isAvailable()) {
+                availableTickets.put(ticket.getType(), ticket.getPrice());
+            }
+        }
+        return availableTickets;
+    }
+
+    // Method to check if a ticket type is available
+    public boolean isTicketTypeAvailable(String ticketType) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getType().equalsIgnoreCase(ticketType) && ticket.isAvailable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Method to get the first available ticket of a specific type
+    public Ticket getFirstAvailableTicketByType(String ticketType) {
+        for (Ticket ticket : tickets) {
+            if (ticket.getType().equalsIgnoreCase(ticketType) && ticket.isAvailable()) {
                 return ticket;
             }
         }
-        return null; // No available tickets
+        return null;
     }
 }

@@ -1,52 +1,59 @@
 import java.util.UUID;
 
-public class Ticket implements Ticketable {
-    private static int totalTicketsSold = 0; // Static field to keep track of tickets sold
+public class Ticket {
+    private static int totalTicketsSold = 0;
     private String ticketId;
     private String eventName;
     private double price;
-    private boolean isBooked;
+    private String type;
+    private boolean available;
 
     // Constructor
-    public Ticket(String eventName, double price) {
-        this.ticketId = UUID.randomUUID().toString(); // Unique identifier for each ticket
+    public Ticket(String eventName, double price, String type) {
+        this.ticketId = UUID.randomUUID().toString();  // Generate a unique ticket ID
         this.eventName = eventName;
         this.price = price;
-        this.isBooked = false;
+        this.type = type;
+        this.available = true;
     }
 
-    // Getters and Setters for Encapsulation
-    public String getTicketId() {
-        return ticketId;
+    // Method to book the ticket
+    public void bookTicket() {
+        if (available) {
+            available = false;
+            totalTicketsSold++;
+        } else {
+            System.out.println("Ticket is not available.");
+        }
     }
 
-    public String getEventName() {
-        return eventName;
+    // Method to check if the ticket is available
+    public boolean isAvailable() {
+        return available;
     }
 
+    // Getter for the ticket type
+    public String getType() {
+        return type;
+    }
+
+    // Getter for the ticket price
     public double getPrice() {
         return price;
     }
 
-    public boolean isBooked() {
-        return isBooked;
+    // Getter for the ticket ID
+    public String getTicketId() {
+        return ticketId;
     }
 
+    // Print ticket details
+    public void printTicketDetails() {
+        System.out.println("Ticket ID: " + ticketId + ", Event: " + eventName + ", Type: " + type + ", Price: $" + price);
+    }
+
+    // Static method to get total tickets sold
     public static int getTotalTicketsSold() {
         return totalTicketsSold;
-    }
-
-    // Method to book a ticket
-    public void bookTicket() {
-        if (!this.isBooked) {
-            this.isBooked = true;
-            totalTicketsSold++; // Increment total tickets sold
-        }
-    }
-
-    // Implemented method from Ticketable interface
-    @Override
-    public void printTicketDetails() {
-        System.out.println("Ticket ID: " + ticketId + ", Event: " + eventName + ", Price: $" + price + ", Booked: " + isBooked);
     }
 }
