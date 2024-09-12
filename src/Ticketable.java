@@ -1,0 +1,3 @@
+interface Ticketable {
+    void printTicketDetails();
+}
